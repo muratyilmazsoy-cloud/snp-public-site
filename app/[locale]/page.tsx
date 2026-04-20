@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FutureFeature } from "@/components/future-feature/FutureFeature";
 import { Hero } from "@/components/sections/Hero";
-import { LayersGrid } from "@/components/sections/LayersGrid";
+import { LayersShowcase } from "@/components/sections/LayersShowcase";
 import { PipelineCards } from "@/components/sections/PipelineCards";
 import { VortexAmbient } from "@/components/sections/VortexAmbient";
 import { VortexDivider } from "@/components/sections/VortexDivider";
@@ -68,7 +68,7 @@ export default async function HomePage({ params }: HomePageProps) {
         </article>
       </section>
 
-      <LayersGrid layers={layers} locale={locale} heading={page.homeLayersHeading} />
+      <LayersShowcase layers={layers} locale={locale} heading={page.homeLayersHeading} />
 
       <VortexDivider />
 

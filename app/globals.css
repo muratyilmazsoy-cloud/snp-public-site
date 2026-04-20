@@ -219,6 +219,68 @@ small {
   transform: translateY(0);
 }
 
+.layer-showcase {
+  position: sticky;
+  top: 110px;
+  min-height: 70vh;
+}
+
+.layer-visual-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.layer-visual {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  border: 0.5px solid var(--navy-edge);
+  border-radius: 999px;
+}
+
+.layer-visual::before,
+.layer-visual::after {
+  content: "";
+  position: absolute;
+  inset: 24px;
+  border: 0.5px solid color-mix(in srgb, var(--cyan) 28%, transparent);
+  border-radius: inherit;
+}
+
+.layer-visual::after {
+  inset: 56px;
+}
+
+.layer-visual-network {
+  background: radial-gradient(circle at 50% 50%, rgba(74, 184, 255, 0.18), transparent 65%);
+}
+
+.layer-visual-clock {
+  background: conic-gradient(from 0deg, rgba(245, 165, 36, 0.4), rgba(74, 184, 255, 0.1), rgba(245, 165, 36, 0.4));
+}
+
+.layer-visual-stream {
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(74, 184, 255, 0.24),
+    rgba(74, 184, 255, 0.24) 2px,
+    rgba(74, 184, 255, 0.05) 2px,
+    rgba(74, 184, 255, 0.05) 12px
+  );
+}
+
+.layer-visual-capital {
+  background: radial-gradient(circle at 28% 30%, rgba(74, 184, 255, 0.32), transparent 45%),
+    radial-gradient(circle at 68% 70%, rgba(74, 184, 255, 0.28), transparent 50%);
+}
+
+.layer-visual-potential {
+  background: radial-gradient(circle at 20% 20%, rgba(240, 244, 255, 0.06), transparent 18%),
+    radial-gradient(circle at 70% 30%, rgba(240, 244, 255, 0.08), transparent 20%),
+    radial-gradient(circle at 45% 65%, rgba(74, 184, 255, 0.38), transparent 28%);
+}
+
 @media (max-width: 768px) {
   h1 {
     font-size: 48px;
@@ -258,6 +320,63 @@ small {
   .headline-letter.is-visible {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  .layer-visual {
+    animation: layer-visual-drift 2.8s ease-in-out infinite;
+  }
+
+  .layer-visual-clock {
+    animation: layer-visual-rotate 3s linear infinite;
+  }
+
+  .layer-visual-stream {
+    animation: layer-stream-flow 2.2s linear infinite;
+  }
+
+  .layer-visual-potential::before,
+  .layer-visual-potential::after {
+    animation: layer-potential-awake 2.8s ease-in-out infinite;
+  }
+}
+
+@keyframes layer-visual-drift {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.65;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+@keyframes layer-visual-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes layer-stream-flow {
+  from {
+    background-position-y: 0;
+  }
+  to {
+    background-position-y: 60px;
+  }
+}
+
+@keyframes layer-potential-awake {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.9;
   }
 }
 
