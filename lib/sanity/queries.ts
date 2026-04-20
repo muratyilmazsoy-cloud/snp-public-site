@@ -1033,3 +1033,211 @@ export async function getSectorPages(locale: Locale): Promise<LocalizedSectorPag
   const docs = await sanityClient.fetch<SectorPageResult[]>(sectorPagesQuery);
   return docs.map((doc) => mapSector(doc, locale));
 }
+
+type SitePageResult = {
+  _id: string;
+  title?: LocalizedValue;
+  slug?: { current: string };
+  heroEyebrow?: LocalizedValue;
+  heroTitle?: LocalizedValue;
+  heroSubtitle?: LocalizedValue;
+  sections?: { heading?: LocalizedValue; content?: LocalizedValue }[];
+  bullets?: LocalizedValue[];
+  ctaLabel?: LocalizedValue;
+  ctaHref?: string;
+};
+
+type BusinessArmyPageResult = {
+  _id: string;
+  title?: LocalizedValue;
+  slug?: { current: string };
+  heroEyebrow?: LocalizedValue;
+  heroTitle?: LocalizedValue;
+  heroSubtitle?: LocalizedValue;
+  preamble?: LocalizedValue;
+  doctrinePrinciples?: LocalizedValue[];
+  ranks?: LocalizedValue[];
+  corps?: LocalizedValue[];
+  territorialCommand?: LocalizedValue[];
+  closing?: LocalizedValue;
+};
+
+type MoatsPageResult = {
+  _id: string;
+  title?: LocalizedValue;
+  slug?: { current: string };
+  heroTitle?: LocalizedValue;
+  heroSubtitle?: LocalizedValue;
+  items?: {
+    name?: LocalizedValue;
+    oldBelief?: LocalizedValue;
+    newReality?: LocalizedValue;
+    risk?: LocalizedValue;
+    solution?: LocalizedValue;
+  }[];
+  closingThesis?: LocalizedValue;
+  ctaLabel?: LocalizedValue;
+  ctaHref?: string;
+};
+
+type TeamMemberResult = {
+  _id: string;
+  name?: string;
+  role?: LocalizedValue;
+  bio?: LocalizedValue;
+  linkedin?: string;
+};
+
+type ClientQuoteResult = {
+  _id: string;
+  clientName?: string;
+  quote?: LocalizedValue;
+  logoLabel?: string;
+};
+
+export type LocalizedSitePage = {
+  id: string;
+  slug: string;
+  title: string;
+  heroEyebrow: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  sections: { heading: string; content: string }[];
+  bullets: string[];
+  ctaLabel: string;
+  ctaHref: string;
+};
+
+export type LocalizedBusinessArmyPage = {
+  id: string;
+  slug: string;
+  title: string;
+  heroEyebrow: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  preamble: string;
+  doctrinePrinciples: string[];
+  ranks: string[];
+  corps: string[];
+  territorialCommand: string[];
+  closing: string;
+};
+
+export type LocalizedMoatsPage = {
+  id: string;
+  slug: string;
+  title: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  items: { name: string; oldBelief: string; newReality: string; risk: string; solution: string }[];
+  closingThesis: string;
+  ctaLabel: string;
+  ctaHref: string;
+};
+
+export type LocalizedTeamMember = {
+  id: string;
+  name: string;
+  role: string;
+  bio: string;
+  linkedin: string;
+};
+
+export type LocalizedClientQuote = {
+  id: string;
+  clientName: string;
+  quote: string;
+  logoLabel: string;
+};
+
+const sitePageBySlugQuery = groq`
+  *[_type == "sitePage" && slug.current == $slug][0]{ _id, title, slug, heroEyebrow, heroTitle, heroSubtitle, sections, bullets, ctaLabel, ctaHref }
+`;
+const businessArmyBySlugQuery = groq`
+  *[_type == "businessArmyPage" && slug.current == $slug][0]{ _id, title, slug, heroEyebrow, heroTitle, heroSubtitle, preamble, doctrinePrinciples, ranks, corps, territorialCommand, closing }
+`;
+const moatsBySlugQuery = groq`
+  *[_type == "moatsPage" && slug.current == $slug][0]{ _id, title, slug, heroTitle, heroSubtitle, items, closingThesis, ctaLabel, ctaHref }
+`;
+const teamMembersQuery = groq`*[_type == "teamMember"]{ _id, name, role, bio, linkedin }`;
+const clientQuotesQuery = groq`*[_type == "clientQuote"]{ _id, clientName, quote, logoLabel }`;
+
+export async function getSitePageBySlug(slug: string, locale: Locale): Promise<LocalizedSitePage | null> {
+  const doc = await sanityClient.fetch<SitePageResult | null>(sitePageBySlugQuery, { slug });
+  if (!doc) return null;
+  return {
+    id: doc._id,
+    slug: doc.slug?.current ?? slug,
+    title: pickLocale(doc.title, locale),
+    heroEyebrow: pickLocale(doc.heroEyebrow, locale),
+    heroTitle: pickLocale(doc.heroTitle, locale),
+    heroSubtitle: pickLocale(doc.heroSubtitle, locale),
+    sections: doc.sections?.map((item) => ({ heading: pickLocale(item.heading, locale), content: pickLocale(item.content, locale) })) ?? [],
+    bullets: doc.bullets?.map((item) => pickLocale(item, locale)).filter(Boolean) ?? [],
+    ctaLabel: pickLocale(doc.ctaLabel, locale),
+    ctaHref: doc.ctaHref ?? "",
+  };
+}
+
+export async function getBusinessArmyPageBySlug(slug: string, locale: Locale): Promise<LocalizedBusinessArmyPage | null> {
+  const doc = await sanityClient.fetch<BusinessArmyPageResult | null>(businessArmyBySlugQuery, { slug });
+  if (!doc) return null;
+  return {
+    id: doc._id,
+    slug: doc.slug?.current ?? slug,
+    title: pickLocale(doc.title, locale),
+    heroEyebrow: pickLocale(doc.heroEyebrow, locale),
+    heroTitle: pickLocale(doc.heroTitle, locale),
+    heroSubtitle: pickLocale(doc.heroSubtitle, locale),
+    preamble: pickLocale(doc.preamble, locale),
+    doctrinePrinciples: doc.doctrinePrinciples?.map((item) => pickLocale(item, locale)).filter(Boolean) ?? [],
+    ranks: doc.ranks?.map((item) => pickLocale(item, locale)).filter(Boolean) ?? [],
+    corps: doc.corps?.map((item) => pickLocale(item, locale)).filter(Boolean) ?? [],
+    territorialCommand: doc.territorialCommand?.map((item) => pickLocale(item, locale)).filter(Boolean) ?? [],
+    closing: pickLocale(doc.closing, locale),
+  };
+}
+
+export async function getMoatsPageBySlug(slug: string, locale: Locale): Promise<LocalizedMoatsPage | null> {
+  const doc = await sanityClient.fetch<MoatsPageResult | null>(moatsBySlugQuery, { slug });
+  if (!doc) return null;
+  return {
+    id: doc._id,
+    slug: doc.slug?.current ?? slug,
+    title: pickLocale(doc.title, locale),
+    heroTitle: pickLocale(doc.heroTitle, locale),
+    heroSubtitle: pickLocale(doc.heroSubtitle, locale),
+    items:
+      doc.items?.map((item) => ({
+        name: pickLocale(item.name, locale),
+        oldBelief: pickLocale(item.oldBelief, locale),
+        newReality: pickLocale(item.newReality, locale),
+        risk: pickLocale(item.risk, locale),
+        solution: pickLocale(item.solution, locale),
+      })) ?? [],
+    closingThesis: pickLocale(doc.closingThesis, locale),
+    ctaLabel: pickLocale(doc.ctaLabel, locale),
+    ctaHref: doc.ctaHref ?? "",
+  };
+}
+
+export async function getTeamMembers(locale: Locale): Promise<LocalizedTeamMember[]> {
+  const docs = await sanityClient.fetch<TeamMemberResult[]>(teamMembersQuery);
+  return docs.map((doc) => ({
+    id: doc._id,
+    name: doc.name ?? "",
+    role: pickLocale(doc.role, locale),
+    bio: pickLocale(doc.bio, locale),
+    linkedin: doc.linkedin ?? "",
+  }));
+}
+
+export async function getClientQuotes(locale: Locale): Promise<LocalizedClientQuote[]> {
+  const docs = await sanityClient.fetch<ClientQuoteResult[]>(clientQuotesQuery);
+  return docs.map((doc) => ({
+    id: doc._id,
+    clientName: doc.clientName ?? "",
+    quote: pickLocale(doc.quote, locale),
+    logoLabel: doc.logoLabel ?? doc.clientName ?? "",
+  }));
+}
