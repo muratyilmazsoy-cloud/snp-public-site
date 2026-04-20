@@ -8,17 +8,25 @@ export function VortexMark({ className }: VortexMarkProps) {
       viewBox="0 0 64 64"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={className}
+      className={`vortex-mark ${className ?? ""}`}
       aria-hidden="true"
     >
-      <circle cx="32" cy="32" r="30" stroke="currentColor" strokeOpacity="0.18" strokeWidth="2" />
+      <defs>
+        <linearGradient id="vortexSpiral" x1="10" y1="10" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#f0f4ff" />
+          <stop offset="0.5" stopColor="#4ab8ff" />
+          <stop offset="1" stopColor="#030b18" />
+        </linearGradient>
+      </defs>
+      <circle cx="32" cy="32" r="30" stroke="rgba(240,244,255,0.14)" strokeWidth="1.5" />
       <path
-        d="M44.8 22.1C40.9 15.9 32.8 13.2 25.6 15.9C18.1 18.7 13.6 26.4 14.5 34.4C15.5 42.4 21.8 48.8 29.8 50C37.7 51.1 45.6 47 49 39.7C51.8 33.8 50.6 26.9 46.1 22.1C43.8 19.7 39.9 18.6 36.7 19.5C33 20.5 29.9 23.5 29 27.1C28.2 30.5 29.3 34.3 31.8 36.7C34.3 39.2 38.4 40.1 41.7 38.9"
-        stroke="currentColor"
-        strokeWidth="3"
+        d="M32 32m-2.5 0a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0 -5 0M32 32m-6 0a6 6 0 1 0 12 0a6 6 0 1 0 -12 0M32 32m-10 0a10 10 0 1 0 20 0a10 10 0 1 0 -20 0M32 32m-14 0a14 14 0 1 0 28 0a14 14 0 1 0 -28 0M32 32m-18 0a18 18 0 1 0 36 0a18 18 0 1 0 -36 0M32 32m-22 0a22 22 0 1 0 44 0a22 22 0 1 0 -44 0"
+        stroke="url(#vortexSpiral)"
+        strokeWidth="2.1"
         strokeLinecap="round"
+        strokeLinejoin="round"
+        opacity="0.95"
       />
-      <circle cx="41.7" cy="38.9" r="3.2" fill="currentColor" />
     </svg>
   );
 }

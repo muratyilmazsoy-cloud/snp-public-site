@@ -4,6 +4,7 @@ import { Hero } from "@/components/sections/Hero";
 import { LayersGrid } from "@/components/sections/LayersGrid";
 import { PipelineCards } from "@/components/sections/PipelineCards";
 import { VortexAmbient } from "@/components/sections/VortexAmbient";
+import { VortexDivider } from "@/components/sections/VortexDivider";
 import type { Locale } from "@/lib/i18n/config";
 import { getLayers, getPageBySlug, getPipelines } from "@/lib/sanity/queries";
 
@@ -67,11 +68,15 @@ export default async function HomePage({ params }: HomePageProps) {
 
       <LayersGrid layers={layers} locale={locale} heading={page.homeLayersHeading} />
 
+      <VortexDivider />
+
       <section className="border border-gray-2/40 bg-black px-6 py-16 md:px-10">
         <p className="font-display text-4xl leading-tight md:text-6xl">{page.homeKarmaQuote}</p>
       </section>
 
       <PipelineCards pipelines={pipelines} locale={locale} heading={page.homeGrowHeading} />
+
+      <VortexDivider />
 
       <section className="space-y-6">
         <h2 className="font-display text-4xl md:text-5xl">{page.homeEcosystemHeading}</h2>
