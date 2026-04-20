@@ -1,6 +1,7 @@
 import Script from "next/script";
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
+import { ScrollEffects } from "@/components/motion/ScrollEffects";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { DiagnoseCTA } from "@/components/layout/DiagnoseCTA";
@@ -34,6 +35,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     <div data-locale={locale} className="flex min-h-screen flex-col bg-navy text-white">
       <JsonLd id="organization-jsonld" data={organizationJsonLd} />
       <BreadcrumbJsonLd />
+      <ScrollEffects />
       {plausibleDomain ? (
         <Script defer data-domain={plausibleDomain} src="https://plausible.io/js/script.js" />
       ) : null}

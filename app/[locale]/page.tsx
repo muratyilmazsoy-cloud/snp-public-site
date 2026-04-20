@@ -30,6 +30,8 @@ export default async function HomePage({ params }: HomePageProps) {
         eyebrow={page.hero.eyebrow}
         title={page.hero.title}
         subtitle={page.hero.subtitle}
+        animatedTitle={true}
+        showScrollIndicator={true}
         actions={
           <>
             <Link

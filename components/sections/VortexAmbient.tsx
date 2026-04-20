@@ -1,9 +1,9 @@
 export function VortexAmbient() {
   return (
     <div className="vortex-ambient-shell pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-      <div className="vortex-grid" />
-      <div className="vortex-radial-glow" />
-      <svg className="vortex-ambient" viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <div className="vortex-grid" data-parallax-speed="0.9" />
+      <div className="vortex-radial-glow" data-parallax-speed="0.8" />
+      <svg className="vortex-ambient" data-parallax-speed="0.6" viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient id="ambientCenter" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(600 600) rotate(90) scale(520)">
             <stop offset="0" stopColor="#7dd0ff" stopOpacity="0.36" />
