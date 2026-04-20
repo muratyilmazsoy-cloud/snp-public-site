@@ -1,7 +1,10 @@
 import { type SchemaTypeDefinition } from "sanity";
 import { karmaFraming } from "@/sanity/schemas/documents/karmaFraming";
 import { layer } from "@/sanity/schemas/documents/layer";
+import { layerDetail } from "@/sanity/schemas/documents/layerDetail";
 import { manifesto } from "@/sanity/schemas/documents/manifesto";
+import { mse } from "@/sanity/schemas/documents/mse";
+import { operasyon } from "@/sanity/schemas/documents/operasyon";
 import { page } from "@/sanity/schemas/documents/page";
 import { pipeline } from "@/sanity/schemas/documents/pipeline";
 import { consultingDiffRow } from "@/sanity/schemas/objects/consultingDiffRow";
@@ -18,6 +21,9 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     pipeline,
     manifesto,
     karmaFraming,
+    operasyon,
+    layerDetail,
+    mse,
     hero,
     richText,
     localizedString,

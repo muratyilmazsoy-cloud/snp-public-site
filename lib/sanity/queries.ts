@@ -386,3 +386,282 @@ export async function getKarmaFramings(locale: Locale): Promise<LocalizedKarmaFr
     description: pickLocale(item.description, locale),
   }));
 }
+
+type OperasyonResult = {
+  _id: string;
+  title?: LocalizedValue;
+  slug?: { current: string };
+  heroEyebrow?: LocalizedValue;
+  heroTitle?: LocalizedValue;
+  heroSubtitle?: LocalizedValue;
+  heroCtaLabel?: LocalizedValue;
+  heroCtaHref?: string;
+  whatItReplacesHeading?: LocalizedValue;
+  legacyStackLabel?: LocalizedValue;
+  operasyonStackLabel?: LocalizedValue;
+  legacyItems?: LocalizedValue[];
+  operasyonItems?: LocalizedValue[];
+  layersHeading?: LocalizedValue;
+  mseHeading?: LocalizedValue;
+  mseDescription?: LocalizedValue;
+  embeddedFinanceHeading?: LocalizedValue;
+  embeddedFinanceDescription?: LocalizedValue;
+  marketplaceHeading?: LocalizedValue;
+  marketplaceDescription?: LocalizedValue;
+  testimonials?: LocalizedValue[];
+  finalCtaLabel?: LocalizedValue;
+  finalCtaHref?: string;
+  formHeading?: LocalizedValue;
+  formSubmitLabel?: LocalizedValue;
+  formNameLabel?: LocalizedValue;
+  formEmailLabel?: LocalizedValue;
+  formCompanyLabel?: LocalizedValue;
+  formCountryLabel?: LocalizedValue;
+  formMessageLabel?: LocalizedValue;
+};
+
+type LayerDetailResult = {
+  _id: string;
+  name?: LocalizedValue;
+  slug?: { current: string };
+  definition?: LocalizedValue;
+  problemHeading?: LocalizedValue;
+  problemParagraphs?: LocalizedValue[];
+  outcomes?: LocalizedValue[];
+  outcomesHeading?: LocalizedValue;
+  connectionsHeading?: LocalizedValue;
+  connectionsText?: LocalizedValue;
+  ctaLabel?: LocalizedValue;
+  ctaHref?: string;
+};
+
+type MseResult = {
+  _id: string;
+  title?: LocalizedValue;
+  slug?: { current: string };
+  heroEyebrow?: LocalizedValue;
+  heroTitle?: LocalizedValue;
+  heroSubtitle?: LocalizedValue;
+  coverageHeading?: LocalizedValue;
+  coveragePoints?: LocalizedValue[];
+  visualizationLabel?: LocalizedValue;
+  ctaLabel?: LocalizedValue;
+  ctaHref?: string;
+};
+
+export type LocalizedOperasyon = {
+  id: string;
+  title: string;
+  slug: string;
+  heroEyebrow: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  heroCtaLabel: string;
+  heroCtaHref: string;
+  whatItReplacesHeading: string;
+  legacyStackLabel: string;
+  operasyonStackLabel: string;
+  legacyItems: string[];
+  operasyonItems: string[];
+  layersHeading: string;
+  mseHeading: string;
+  mseDescription: string;
+  embeddedFinanceHeading: string;
+  embeddedFinanceDescription: string;
+  marketplaceHeading: string;
+  marketplaceDescription: string;
+  testimonials: string[];
+  finalCtaLabel: string;
+  finalCtaHref: string;
+  formHeading: string;
+  formSubmitLabel: string;
+  formLabels: {
+    name: string;
+    email: string;
+    company: string;
+    country: string;
+    message: string;
+    sending: string;
+    success: string;
+    error: string;
+  };
+};
+
+export type LocalizedLayerDetail = {
+  id: string;
+  name: string;
+  slug: string;
+  definition: string;
+  problemHeading: string;
+  problemParagraphs: string[];
+  outcomesHeading: string;
+  outcomes: string[];
+  connectionsHeading: string;
+  connectionsText: string;
+  ctaLabel: string;
+  ctaHref: string;
+};
+
+export type LocalizedMse = {
+  id: string;
+  title: string;
+  slug: string;
+  heroEyebrow: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  coverageHeading: string;
+  coveragePoints: string[];
+  visualizationLabel: string;
+  ctaLabel: string;
+  ctaHref: string;
+};
+
+const operasyonBySlugQuery = groq`
+  *[_type == "operasyon" && slug.current == $slug][0]{
+    _id,
+    title,
+    slug,
+    heroEyebrow,
+    heroTitle,
+    heroSubtitle,
+    heroCtaLabel,
+    heroCtaHref,
+    whatItReplacesHeading,
+    legacyStackLabel,
+    operasyonStackLabel,
+    legacyItems,
+    operasyonItems,
+    layersHeading,
+    mseHeading,
+    mseDescription,
+    embeddedFinanceHeading,
+    embeddedFinanceDescription,
+    marketplaceHeading,
+    marketplaceDescription,
+    testimonials,
+    finalCtaLabel,
+    finalCtaHref,
+    formHeading,
+    formSubmitLabel,
+    formNameLabel,
+    formEmailLabel,
+    formCompanyLabel,
+    formCountryLabel,
+    formMessageLabel
+  }
+`;
+
+const layerDetailBySlugQuery = groq`
+  *[_type == "layerDetail" && slug.current == $slug][0]{
+    _id,
+    name,
+    slug,
+    definition,
+    problemHeading,
+    problemParagraphs,
+    outcomes,
+    outcomesHeading,
+    connectionsHeading,
+    connectionsText,
+    ctaLabel,
+    ctaHref
+  }
+`;
+
+const mseBySlugQuery = groq`
+  *[_type == "mse" && slug.current == $slug][0]{
+    _id,
+    title,
+    slug,
+    heroEyebrow,
+    heroTitle,
+    heroSubtitle,
+    coverageHeading,
+    coveragePoints,
+    visualizationLabel,
+    ctaLabel,
+    ctaHref
+  }
+`;
+
+export async function getOperasyonBySlug(slug: string, locale: Locale): Promise<LocalizedOperasyon | null> {
+  const doc = await sanityClient.fetch<OperasyonResult | null>(operasyonBySlugQuery, { slug });
+  if (!doc) return null;
+
+  return {
+    id: doc._id,
+    title: pickLocale(doc.title, locale),
+    slug: doc.slug?.current ?? slug,
+    heroEyebrow: pickLocale(doc.heroEyebrow, locale),
+    heroTitle: pickLocale(doc.heroTitle, locale),
+    heroSubtitle: pickLocale(doc.heroSubtitle, locale),
+    heroCtaLabel: pickLocale(doc.heroCtaLabel, locale),
+    heroCtaHref: doc.heroCtaHref ?? "",
+    whatItReplacesHeading: pickLocale(doc.whatItReplacesHeading, locale),
+    legacyStackLabel: pickLocale(doc.legacyStackLabel, locale),
+    operasyonStackLabel: pickLocale(doc.operasyonStackLabel, locale),
+    legacyItems: doc.legacyItems?.map((item) => pickLocale(item, locale)).filter(Boolean) ?? [],
+    operasyonItems: doc.operasyonItems?.map((item) => pickLocale(item, locale)).filter(Boolean) ?? [],
+    layersHeading: pickLocale(doc.layersHeading, locale),
+    mseHeading: pickLocale(doc.mseHeading, locale),
+    mseDescription: pickLocale(doc.mseDescription, locale),
+    embeddedFinanceHeading: pickLocale(doc.embeddedFinanceHeading, locale),
+    embeddedFinanceDescription: pickLocale(doc.embeddedFinanceDescription, locale),
+    marketplaceHeading: pickLocale(doc.marketplaceHeading, locale),
+    marketplaceDescription: pickLocale(doc.marketplaceDescription, locale),
+    testimonials: doc.testimonials?.map((item) => pickLocale(item, locale)).filter(Boolean) ?? [],
+    finalCtaLabel: pickLocale(doc.finalCtaLabel, locale),
+    finalCtaHref: doc.finalCtaHref ?? "",
+    formHeading: pickLocale(doc.formHeading, locale),
+    formSubmitLabel: pickLocale(doc.formSubmitLabel, locale),
+    formLabels: {
+      name: pickLocale(doc.formNameLabel, locale),
+      email: pickLocale(doc.formEmailLabel, locale),
+      company: pickLocale(doc.formCompanyLabel, locale),
+      country: pickLocale(doc.formCountryLabel, locale),
+      message: pickLocale(doc.formMessageLabel, locale),
+      sending: locale === "tr" ? "Gonderiliyor..." : "Sending...",
+      success: locale === "tr" ? "Talebiniz alindi. Kisa surede iletisim kuracagiz." : "Request sent. We will contact you shortly.",
+      error: locale === "tr" ? "Talep gonderilemedi. Lutfen tekrar deneyin." : "Could not send your request. Please try again.",
+    },
+  };
+}
+
+export async function getLayerDetailBySlug(slug: string, locale: Locale): Promise<LocalizedLayerDetail | null> {
+  const doc = await sanityClient.fetch<LayerDetailResult | null>(layerDetailBySlugQuery, { slug });
+  if (!doc) return null;
+
+  return {
+    id: doc._id,
+    name: pickLocale(doc.name, locale),
+    slug: doc.slug?.current ?? slug,
+    definition: pickLocale(doc.definition, locale),
+    problemHeading: pickLocale(doc.problemHeading, locale),
+    problemParagraphs: doc.problemParagraphs?.map((item) => pickLocale(item, locale)).filter(Boolean) ?? [],
+    outcomesHeading: pickLocale(doc.outcomesHeading, locale),
+    outcomes: doc.outcomes?.map((item) => pickLocale(item, locale)).filter(Boolean) ?? [],
+    connectionsHeading: pickLocale(doc.connectionsHeading, locale),
+    connectionsText: pickLocale(doc.connectionsText, locale),
+    ctaLabel: pickLocale(doc.ctaLabel, locale),
+    ctaHref: doc.ctaHref ?? "",
+  };
+}
+
+export async function getMseBySlug(slug: string, locale: Locale): Promise<LocalizedMse | null> {
+  const doc = await sanityClient.fetch<MseResult | null>(mseBySlugQuery, { slug });
+  if (!doc) return null;
+
+  return {
+    id: doc._id,
+    title: pickLocale(doc.title, locale),
+    slug: doc.slug?.current ?? slug,
+    heroEyebrow: pickLocale(doc.heroEyebrow, locale),
+    heroTitle: pickLocale(doc.heroTitle, locale),
+    heroSubtitle: pickLocale(doc.heroSubtitle, locale),
+    coverageHeading: pickLocale(doc.coverageHeading, locale),
+    coveragePoints: doc.coveragePoints?.map((item) => pickLocale(item, locale)).filter(Boolean) ?? [],
+    visualizationLabel: pickLocale(doc.visualizationLabel, locale),
+    ctaLabel: pickLocale(doc.ctaLabel, locale),
+    ctaHref: doc.ctaHref ?? "",
+  };
+}

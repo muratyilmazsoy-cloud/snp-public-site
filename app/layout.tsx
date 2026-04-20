@@ -39,7 +39,9 @@ export default async function RootLayout({
       suppressHydrationWarning={true}
       className={`${inter.variable} ${interTight.variable} ${jetBrainsMono.variable}`}
     >
-      <body suppressHydrationWarning={true}>{children}</body>
+      <body suppressHydrationWarning={true}>
+        <div suppressHydrationWarning={true}>{children}</div>
+      </body>
     </html>
   );
 }

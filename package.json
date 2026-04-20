@@ -7,9 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "seed:slice2": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/seed-slice2.ts"
+    "seed:slice2": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/seed-slice2.ts",
+    "seed:slice3": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/seed-slice3.ts"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "@sanity/document-internationalization": "^3.3.3",
     "@sanity/image-url": "^2.1.1",
     "lucide-react": "^1.8.0",
@@ -17,7 +19,9 @@
     "next-sanity": "^9.12.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "sanity": "^3.99.0"
+    "react-hook-form": "^7.72.1",
+    "sanity": "^3.99.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
