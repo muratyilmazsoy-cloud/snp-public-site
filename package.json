@@ -10,7 +10,8 @@
     "seed:slice2": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/seed-slice2.ts",
     "seed:slice3": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/seed-slice3.ts",
     "seed:slice4": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/seed-slice4.ts",
-    "seed:franchise-map": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/seed-franchise-map.ts"
+    "seed:franchise-map": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/seed-franchise-map.ts",
+    "seed:slice5": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/seed-slice5.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

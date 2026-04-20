@@ -13,12 +13,15 @@ import { page } from "@/sanity/schemas/documents/page";
 import { pipelineDetail } from "@/sanity/schemas/documents/pipelineDetail";
 import { pipeline } from "@/sanity/schemas/documents/pipeline";
 import { rank } from "@/sanity/schemas/documents/rank";
+import { sectorPage } from "@/sanity/schemas/documents/sectorPage";
+import { servicesPage } from "@/sanity/schemas/documents/servicesPage";
 import { consultingDiffRow } from "@/sanity/schemas/objects/consultingDiffRow";
 import { hero } from "@/sanity/schemas/objects/hero";
 import { homeStat } from "@/sanity/schemas/objects/homeStat";
 import { localizedString } from "@/sanity/schemas/objects/localizedString";
 import { localizedText } from "@/sanity/schemas/objects/localizedText";
 import { richText } from "@/sanity/schemas/objects/richText";
+import { serviceLine } from "@/sanity/schemas/objects/serviceLine";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -36,10 +39,13 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     rank,
     country,
     branch,
+    servicesPage,
+    sectorPage,
     hero,
     richText,
     localizedString,
     localizedText,
+    serviceLine,
     homeStat,
     consultingDiffRow,
   ],

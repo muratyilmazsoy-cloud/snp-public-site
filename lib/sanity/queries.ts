@@ -900,3 +900,136 @@ export async function getCountries(locale: Locale): Promise<LocalizedCountry[]> 
     defaultZoom: doc.defaultZoom ?? 5,
   }));
 }
+
+type ServicesPageResult = {
+  _id: string;
+  title?: LocalizedValue;
+  slug?: { current: string };
+  heroEyebrow?: LocalizedValue;
+  heroTitle?: LocalizedValue;
+  heroSubtitle?: LocalizedValue;
+  tierHeading?: LocalizedValue;
+  tierCards?: { name?: LocalizedValue; summary?: LocalizedValue; href?: string }[];
+  pricingCalloutLabel?: LocalizedValue;
+  pricingCalloutHref?: string;
+  serviceLines?: { title?: LocalizedValue; description?: LocalizedValue }[];
+  contactCtaLabel?: LocalizedValue;
+  contactCtaHref?: string;
+};
+
+type SectorPageResult = {
+  _id: string;
+  title?: LocalizedValue;
+  slug?: { current: string };
+  heroEyebrow?: LocalizedValue;
+  heroTitle?: LocalizedValue;
+  heroSubtitle?: LocalizedValue;
+  challenges?: LocalizedValue[];
+  serviceLinks?: { label?: LocalizedValue; href?: string }[];
+  ctaLabel?: LocalizedValue;
+  ctaHref?: string;
+};
+
+export type LocalizedServicesPage = {
+  id: string;
+  slug: string;
+  title: string;
+  heroEyebrow: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  tierHeading: string;
+  tierCards: { name: string; summary: string; href: string }[];
+  pricingCalloutLabel: string;
+  pricingCalloutHref: string;
+  serviceLines: { title: string; description: string }[];
+  contactCtaLabel: string;
+  contactCtaHref: string;
+};
+
+export type LocalizedSectorPage = {
+  id: string;
+  slug: string;
+  title: string;
+  heroEyebrow: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  challenges: string[];
+  serviceLinks: { label: string; href: string }[];
+  ctaLabel: string;
+  ctaHref: string;
+};
+
+const servicesPageBySlugQuery = groq`
+  *[_type == "servicesPage" && slug.current == $slug][0]{
+    _id, title, slug, heroEyebrow, heroTitle, heroSubtitle, tierHeading, tierCards,
+    pricingCalloutLabel, pricingCalloutHref, serviceLines, contactCtaLabel, contactCtaHref
+  }
+`;
+
+const sectorPageBySlugQuery = groq`
+  *[_type == "sectorPage" && slug.current == $slug][0]{
+    _id, title, slug, heroEyebrow, heroTitle, heroSubtitle, challenges, serviceLinks, ctaLabel, ctaHref
+  }
+`;
+
+const sectorPagesQuery = groq`
+  *[_type == "sectorPage"] | order(title.en asc){
+    _id, title, slug, heroEyebrow, heroTitle, heroSubtitle, challenges, serviceLinks, ctaLabel, ctaHref
+  }
+`;
+
+export async function getServicesPageBySlug(slug: string, locale: Locale): Promise<LocalizedServicesPage | null> {
+  const doc = await sanityClient.fetch<ServicesPageResult | null>(servicesPageBySlugQuery, { slug });
+  if (!doc) return null;
+  return {
+    id: doc._id,
+    slug: doc.slug?.current ?? slug,
+    title: pickLocale(doc.title, locale),
+    heroEyebrow: pickLocale(doc.heroEyebrow, locale),
+    heroTitle: pickLocale(doc.heroTitle, locale),
+    heroSubtitle: pickLocale(doc.heroSubtitle, locale),
+    tierHeading: pickLocale(doc.tierHeading, locale),
+    tierCards: doc.tierCards?.map((item) => ({
+      name: pickLocale(item.name, locale),
+      summary: pickLocale(item.summary, locale),
+      href: item.href ?? "",
+    })) ?? [],
+    pricingCalloutLabel: pickLocale(doc.pricingCalloutLabel, locale),
+    pricingCalloutHref: doc.pricingCalloutHref ?? "",
+    serviceLines: doc.serviceLines?.map((item) => ({
+      title: pickLocale(item.title, locale),
+      description: pickLocale(item.description, locale),
+    })) ?? [],
+    contactCtaLabel: pickLocale(doc.contactCtaLabel, locale),
+    contactCtaHref: doc.contactCtaHref ?? "",
+  };
+}
+
+function mapSector(doc: SectorPageResult, locale: Locale): LocalizedSectorPage {
+  return {
+    id: doc._id,
+    slug: doc.slug?.current ?? "",
+    title: pickLocale(doc.title, locale),
+    heroEyebrow: pickLocale(doc.heroEyebrow, locale),
+    heroTitle: pickLocale(doc.heroTitle, locale),
+    heroSubtitle: pickLocale(doc.heroSubtitle, locale),
+    challenges: doc.challenges?.map((item) => pickLocale(item, locale)).filter(Boolean) ?? [],
+    serviceLinks: doc.serviceLinks?.map((item) => ({
+      label: pickLocale(item.label, locale),
+      href: item.href ?? "",
+    })) ?? [],
+    ctaLabel: pickLocale(doc.ctaLabel, locale),
+    ctaHref: doc.ctaHref ?? "",
+  };
+}
+
+export async function getSectorPageBySlug(slug: string, locale: Locale): Promise<LocalizedSectorPage | null> {
+  const doc = await sanityClient.fetch<SectorPageResult | null>(sectorPageBySlugQuery, { slug });
+  if (!doc) return null;
+  return mapSector(doc, locale);
+}
+
+export async function getSectorPages(locale: Locale): Promise<LocalizedSectorPage[]> {
+  const docs = await sanityClient.fetch<SectorPageResult[]>(sectorPagesQuery);
+  return docs.map((doc) => mapSector(doc, locale));
+}
