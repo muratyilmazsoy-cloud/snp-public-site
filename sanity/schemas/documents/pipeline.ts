@@ -41,5 +41,14 @@ export const pipeline = defineType({
       type: "number",
       validation: (rule) => rule.required().integer().min(1),
     }),
+    defineField({
+      name: "roleType",
+      title: "Role type",
+      type: "string",
+      options: {
+        list: ["seller", "maker", "professional", "owner"],
+      },
+      validation: (rule) => rule.required(),
+    }),
   ],
 });

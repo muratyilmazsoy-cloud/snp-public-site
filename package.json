@@ -8,13 +8,16 @@
     "start": "next start",
     "lint": "eslint .",
     "seed:slice2": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/seed-slice2.ts",
-    "seed:slice3": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/seed-slice3.ts"
+    "seed:slice3": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/seed-slice3.ts",
+    "seed:slice4": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/seed-slice4.ts",
+    "seed:franchise-map": "node --env-file=.env.local ./node_modules/tsx/dist/cli.mjs scripts/seed-franchise-map.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@sanity/document-internationalization": "^3.3.3",
     "@sanity/image-url": "^2.1.1",
     "lucide-react": "^1.8.0",
+    "mapbox-gl": "^3.22.0",
     "next": "^15.5.15",
     "next-sanity": "^9.12.3",
     "react": "^19.2.0",

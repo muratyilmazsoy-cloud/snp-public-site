@@ -7,6 +7,7 @@ const routeToEnvMap: Record<string, string | undefined> = {
   "franchise-application": process.env.N8N_WEBHOOK_FRANCHISE_APPLICATION,
   "career-application": process.env.N8N_WEBHOOK_CAREER_APPLICATION,
   "transformation-inquiry": process.env.N8N_WEBHOOK_TRANSFORMATION_INQUIRY,
+  "diagnose-start": process.env.N8N_WEBHOOK_DIAGNOSE_START,
 };
 
 export async function POST(request: NextRequest, context: { params: Promise<{ route: string[] }> }) {

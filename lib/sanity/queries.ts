@@ -665,3 +665,238 @@ export async function getMseBySlug(slug: string, locale: Locale): Promise<Locali
     ctaHref: doc.ctaHref ?? "",
   };
 }
+
+type PipelineDetailResult = {
+  _id: string;
+  title?: LocalizedValue;
+  slug?: { current: string };
+  heroEyebrow?: LocalizedValue;
+  heroTitle?: LocalizedValue;
+  heroSubtitle?: LocalizedValue;
+  distinctionLabel?: LocalizedValue;
+  distinctionText?: LocalizedValue;
+  sectionOneHeading?: LocalizedValue;
+  sectionTwoHeading?: LocalizedValue;
+  sectionThreeHeading?: LocalizedValue;
+  sectionFourHeading?: LocalizedValue;
+  sectionFiveHeading?: LocalizedValue;
+  listOne?: LocalizedValue[];
+  listTwo?: LocalizedValue[];
+  listThree?: LocalizedValue[];
+  contentOne?: LocalizedValue;
+  contentTwo?: LocalizedValue;
+  contentThree?: LocalizedValue;
+  ctaLabel?: LocalizedValue;
+  ctaHref?: string;
+  formSubmitLabel?: LocalizedValue;
+  formNameLabel?: LocalizedValue;
+  formEmailLabel?: LocalizedValue;
+  formCompanyLabel?: LocalizedValue;
+  formPhoneLabel?: LocalizedValue;
+  formCountryLabel?: LocalizedValue;
+  formMessageLabel?: LocalizedValue;
+  formExtraOneLabel?: LocalizedValue;
+  formExtraTwoLabel?: LocalizedValue;
+};
+
+type RankResult = { _id: string; name?: LocalizedValue; order: number };
+type CorpsResult = { _id: string; name?: LocalizedValue; order: number };
+type RegionResult = {
+  _id: string;
+  name?: LocalizedValue;
+  slug?: { current: string };
+  city?: string;
+  status?: "active" | "reserved" | "available";
+  description?: LocalizedValue;
+};
+type BranchResult = {
+  _id: string;
+  name?: LocalizedValue;
+  city?: string;
+  lat: number;
+  lng: number;
+  status?: "active" | "reserved" | "available";
+  regionRef?: { _id: string };
+  countryRef?: { _id: string };
+};
+type CountryResult = {
+  _id: string;
+  name?: LocalizedValue;
+  code?: string;
+  centerLat?: number;
+  centerLng?: number;
+  defaultZoom?: number;
+};
+
+export type LocalizedPipelineDetail = {
+  id: string;
+  title: string;
+  slug: string;
+  heroEyebrow: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  distinctionLabel: string;
+  distinctionText: string;
+  sectionOneHeading: string;
+  sectionTwoHeading: string;
+  sectionThreeHeading: string;
+  sectionFourHeading: string;
+  sectionFiveHeading: string;
+  listOne: string[];
+  listTwo: string[];
+  listThree: string[];
+  contentOne: string;
+  contentTwo: string;
+  contentThree: string;
+  ctaLabel: string;
+  ctaHref: string;
+  formSubmitLabel: string;
+  formLabels: {
+    name: string;
+    email: string;
+    company: string;
+    phone: string;
+    country: string;
+    message: string;
+    extraOne: string;
+    extraTwo: string;
+    sending: string;
+    success: string;
+    error: string;
+  };
+};
+
+export type LocalizedRank = { id: string; name: string; order: number };
+export type LocalizedCorps = { id: string; name: string; order: number };
+export type LocalizedRegion = {
+  id: string;
+  name: string;
+  slug: string;
+  city: string;
+  status: "active" | "reserved" | "available";
+  description: string;
+};
+export type LocalizedBranch = {
+  id: string;
+  name: string;
+  city: string;
+  lat: number;
+  lng: number;
+  status: "active" | "reserved" | "available";
+  regionId: string;
+  countryId: string;
+};
+export type LocalizedCountry = {
+  id: string;
+  name: string;
+  code: string;
+  centerLat: number;
+  centerLng: number;
+  defaultZoom: number;
+};
+
+const pipelineDetailBySlugQuery = groq`
+  *[_type == "pipelineDetail" && slug.current == $slug][0]{
+    _id, title, slug, heroEyebrow, heroTitle, heroSubtitle, distinctionLabel, distinctionText,
+    sectionOneHeading, sectionTwoHeading, sectionThreeHeading, sectionFourHeading, sectionFiveHeading,
+    listOne, listTwo, listThree, contentOne, contentTwo, contentThree, ctaLabel, ctaHref,
+    formSubmitLabel, formNameLabel, formEmailLabel, formCompanyLabel, formPhoneLabel, formCountryLabel,
+    formMessageLabel, formExtraOneLabel, formExtraTwoLabel
+  }
+`;
+
+const ranksQuery = groq`*[_type == "rank"] | order(order asc){ _id, name, order }`;
+const corpsQuery = groq`*[_type == "corps"] | order(order asc){ _id, name, order }`;
+const regionsQuery = groq`*[_type == "franchiseRegion"]{ _id, name, slug, city, status, description }`;
+const branchesQuery = groq`*[_type == "branch"]{ _id, name, city, lat, lng, status, regionRef->{_id}, countryRef->{_id} }`;
+const countriesQuery = groq`*[_type == "country"]{ _id, name, code, centerLat, centerLng, defaultZoom }`;
+
+export async function getPipelineDetailBySlug(slug: string, locale: Locale): Promise<LocalizedPipelineDetail | null> {
+  const doc = await sanityClient.fetch<PipelineDetailResult | null>(pipelineDetailBySlugQuery, { slug });
+  if (!doc) return null;
+  return {
+    id: doc._id,
+    title: pickLocale(doc.title, locale),
+    slug: doc.slug?.current ?? slug,
+    heroEyebrow: pickLocale(doc.heroEyebrow, locale),
+    heroTitle: pickLocale(doc.heroTitle, locale),
+    heroSubtitle: pickLocale(doc.heroSubtitle, locale),
+    distinctionLabel: pickLocale(doc.distinctionLabel, locale),
+    distinctionText: pickLocale(doc.distinctionText, locale),
+    sectionOneHeading: pickLocale(doc.sectionOneHeading, locale),
+    sectionTwoHeading: pickLocale(doc.sectionTwoHeading, locale),
+    sectionThreeHeading: pickLocale(doc.sectionThreeHeading, locale),
+    sectionFourHeading: pickLocale(doc.sectionFourHeading, locale),
+    sectionFiveHeading: pickLocale(doc.sectionFiveHeading, locale),
+    listOne: doc.listOne?.map((item) => pickLocale(item, locale)).filter(Boolean) ?? [],
+    listTwo: doc.listTwo?.map((item) => pickLocale(item, locale)).filter(Boolean) ?? [],
+    listThree: doc.listThree?.map((item) => pickLocale(item, locale)).filter(Boolean) ?? [],
+    contentOne: pickLocale(doc.contentOne, locale),
+    contentTwo: pickLocale(doc.contentTwo, locale),
+    contentThree: pickLocale(doc.contentThree, locale),
+    ctaLabel: pickLocale(doc.ctaLabel, locale),
+    ctaHref: doc.ctaHref ?? "",
+    formSubmitLabel: pickLocale(doc.formSubmitLabel, locale),
+    formLabels: {
+      name: pickLocale(doc.formNameLabel, locale),
+      email: pickLocale(doc.formEmailLabel, locale),
+      company: pickLocale(doc.formCompanyLabel, locale),
+      phone: pickLocale(doc.formPhoneLabel, locale),
+      country: pickLocale(doc.formCountryLabel, locale),
+      message: pickLocale(doc.formMessageLabel, locale),
+      extraOne: pickLocale(doc.formExtraOneLabel, locale),
+      extraTwo: pickLocale(doc.formExtraTwoLabel, locale),
+      sending: locale === "tr" ? "Gonderiliyor..." : "Sending...",
+      success: locale === "tr" ? "Basvuru alindi." : "Application received.",
+      error: locale === "tr" ? "Basvuru gonderilemedi." : "Could not submit your application.",
+    },
+  };
+}
+
+export async function getRanks(locale: Locale): Promise<LocalizedRank[]> {
+  const docs = await sanityClient.fetch<RankResult[]>(ranksQuery);
+  return docs.map((doc) => ({ id: doc._id, name: pickLocale(doc.name, locale), order: doc.order }));
+}
+
+export async function getCorps(locale: Locale): Promise<LocalizedCorps[]> {
+  const docs = await sanityClient.fetch<CorpsResult[]>(corpsQuery);
+  return docs.map((doc) => ({ id: doc._id, name: pickLocale(doc.name, locale), order: doc.order }));
+}
+
+export async function getFranchiseRegions(locale: Locale): Promise<LocalizedRegion[]> {
+  const docs = await sanityClient.fetch<RegionResult[]>(regionsQuery);
+  return docs.map((doc) => ({
+    id: doc._id,
+    name: pickLocale(doc.name, locale),
+    slug: doc.slug?.current ?? "",
+    city: doc.city ?? "",
+    status: doc.status ?? "available",
+    description: pickLocale(doc.description, locale),
+  }));
+}
+
+export async function getBranches(locale: Locale): Promise<LocalizedBranch[]> {
+  const docs = await sanityClient.fetch<BranchResult[]>(branchesQuery);
+  return docs.map((doc) => ({
+    id: doc._id,
+    name: pickLocale(doc.name, locale),
+    city: doc.city ?? "",
+    lat: doc.lat,
+    lng: doc.lng,
+    status: doc.status ?? "available",
+    regionId: doc.regionRef?._id ?? "",
+    countryId: doc.countryRef?._id ?? "",
+  }));
+}
+
+export async function getCountries(locale: Locale): Promise<LocalizedCountry[]> {
+  const docs = await sanityClient.fetch<CountryResult[]>(countriesQuery);
+  return docs.map((doc) => ({
+    id: doc._id,
+    name: pickLocale(doc.name, locale),
+    code: doc.code ?? "",
+    centerLat: doc.centerLat ?? 0,
+    centerLng: doc.centerLng ?? 0,
+    defaultZoom: doc.defaultZoom ?? 5,
+  }));
+}
