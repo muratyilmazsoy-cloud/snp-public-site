@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
-import { MoatsStack } from "@/components/sections/MoatsStack";
+import { MoatsStackLazy } from "@/components/sections/MoatsStackLazy";
 import { getMoatsPageBySlug } from "@/lib/sanity/queries";
 
 type Props = { params: Promise<{ locale: Locale }> };
@@ -17,7 +17,7 @@ export default async function MoatsPage({ params }: Props) {
         <p className="mt-4 whitespace-pre-line text-gray-1">{page.heroSubtitle}</p>
       </section>
 
-      <MoatsStack items={page.items} />
+      <MoatsStackLazy items={page.items} />
 
       <section className="border border-gray-2/40 bg-navy-2 p-6">
         <p className="whitespace-pre-line text-gray-1">{page.closingThesis}</p>

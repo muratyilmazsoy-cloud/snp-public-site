@@ -1,3 +1,5 @@
+"use client";
+
 import type { LocalizedMoatsPage } from "@/lib/sanity/queries";
 
 export function MoatsStack({ items }: { items: LocalizedMoatsPage["items"] }) {

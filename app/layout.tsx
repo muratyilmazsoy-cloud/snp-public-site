@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { Inter, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import { defaultLocale, isSupportedLocale } from "@/lib/i18n/config";
+import { pageMetadata } from "@/lib/seo/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -19,10 +20,15 @@ const jetBrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
 });
 
-export const metadata: Metadata = {
-  title: "Standards & Partners",
-  description: "Business Infrastructure company website",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const requestHeaders = await headers();
+  const pathname = requestHeaders.get("x-snp-pathname") ?? `/${defaultLocale}`;
+  return pageMetadata(
+    "Standards & Partners",
+    "Business Infrastructure company website",
+    pathname,
+  );
+}
 
 export default async function RootLayout({
   children,

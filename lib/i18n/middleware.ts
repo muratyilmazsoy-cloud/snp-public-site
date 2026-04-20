@@ -18,6 +18,7 @@ export function middleware(request: NextRequest) {
   if (isSupportedLocale(firstSegment)) {
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set("x-snp-locale", firstSegment);
+    requestHeaders.set("x-snp-pathname", pathname);
 
     const response = NextResponse.next({
       request: {

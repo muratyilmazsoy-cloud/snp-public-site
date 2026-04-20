@@ -1,5 +1,5 @@
 import { CalEmbed } from "@/components/sections/CalEmbed";
-import { FranchiseMap } from "@/components/sections/FranchiseMap";
+import { FranchiseMapLazy } from "@/components/sections/FranchiseMapLazy";
 import { PipelineApplicationForm } from "@/components/forms/PipelineApplicationForm";
 import type { Locale } from "@/lib/i18n/config";
 import { getBranches, getCountries, getFranchiseRegions, getPipelineDetailBySlug } from "@/lib/sanity/queries";
@@ -43,7 +43,7 @@ export default async function BecomePartnerPage({ params }: Props) {
         <p className="text-gray-1">{detail.contentOne}</p>
       </section>
 
-      <FranchiseMap branches={branches} regions={regions} countries={countries} title={detail.sectionThreeHeading} locale={locale} />
+      <FranchiseMapLazy branches={branches} regions={regions} countries={countries} title={detail.sectionThreeHeading} locale={locale} />
 
       <section className="space-y-4">
         <h2 className="font-display text-4xl md:text-5xl">{detail.sectionFourHeading}</h2>
