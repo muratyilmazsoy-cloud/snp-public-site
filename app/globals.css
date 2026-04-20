@@ -281,6 +281,70 @@ small {
     radial-gradient(circle at 45% 65%, rgba(74, 184, 255, 0.38), transparent 28%);
 }
 
+.karma-centerpiece {
+  isolation: isolate;
+}
+
+.karma-dot {
+  position: absolute;
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--amber);
+}
+
+.karma-rings {
+  position: absolute;
+  width: 620px;
+  height: 620px;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 165, 36, 0.18);
+}
+
+.karma-rings::before,
+.karma-rings::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(245, 165, 36, 0.14);
+}
+
+.karma-rings::before {
+  transform: scale(0.8);
+}
+
+.karma-rings::after {
+  transform: scale(1.2);
+}
+
+.karma-label {
+  position: absolute;
+  z-index: 1;
+  color: var(--text-secondary);
+}
+
+.karma-label-top {
+  top: 18%;
+}
+
+.karma-label-right {
+  right: 12%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.karma-label-bottom {
+  bottom: 18%;
+}
+
+.karma-label-left {
+  left: 12%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 @media (max-width: 768px) {
   h1 {
     font-size: 48px;
@@ -338,6 +402,35 @@ small {
   .layer-visual-potential::after {
     animation: layer-potential-awake 2.8s ease-in-out infinite;
   }
+
+  .karma-dot {
+    animation: karma-pulse 8s ease-in-out infinite;
+  }
+
+  .karma-rings {
+    animation: karma-ripple 8s ease-out infinite;
+  }
+
+  .karma-label {
+    opacity: 0;
+    animation: karma-label-fade 500ms ease-out forwards;
+  }
+
+  .karma-label-top {
+    animation-delay: 140ms;
+  }
+
+  .karma-label-right {
+    animation-delay: 240ms;
+  }
+
+  .karma-label-bottom {
+    animation-delay: 340ms;
+  }
+
+  .karma-label-left {
+    animation-delay: 440ms;
+  }
 }
 
 @keyframes layer-visual-drift {
@@ -377,6 +470,40 @@ small {
   }
   50% {
     opacity: 0.9;
+  }
+}
+
+@keyframes karma-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes karma-ripple {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.3);
+  }
+}
+
+@keyframes karma-label-fade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

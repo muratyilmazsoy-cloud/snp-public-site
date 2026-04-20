@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Hero } from "@/components/sections/Hero";
+import { KarmaCenterpiece } from "@/components/sections/KarmaCenterpiece";
 import { KarmaFramingsGrid } from "@/components/sections/KarmaFramingsGrid";
 import { KarmaRealtimeDiagram } from "@/components/sections/KarmaRealtimeDiagram";
 import type { Locale } from "@/lib/i18n/config";
@@ -20,6 +21,12 @@ export default async function KarmaPage({ params }: KarmaPageProps) {
   return (
     <div className="space-y-20 py-10 md:space-y-[120px] md:py-14">
       <Hero eyebrow={page.hero.eyebrow} title={page.hero.title} subtitle={page.hero.subtitle} />
+
+      <KarmaCenterpiece
+        quote={locale === "tr" ? "Her aksiyonun bir karmasi vardir." : "Every action has a karma."}
+        translation={locale === "tr" ? "Her aksiyonun bir karmasi vardir." : "Every action has a karma."}
+        line="The universal law was always at work. We built the infrastructure to reveal it."
+      />
 
       <KarmaFramingsGrid framings={framings} heading={page.karmaFramingsHeading} />
 

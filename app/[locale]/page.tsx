@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FutureFeature } from "@/components/future-feature/FutureFeature";
 import { Hero } from "@/components/sections/Hero";
+import { KarmaCenterpiece } from "@/components/sections/KarmaCenterpiece";
 import { LayersShowcase } from "@/components/sections/LayersShowcase";
 import { PipelineCards } from "@/components/sections/PipelineCards";
 import { VortexAmbient } from "@/components/sections/VortexAmbient";
@@ -72,9 +73,10 @@ export default async function HomePage({ params }: HomePageProps) {
 
       <VortexDivider />
 
-      <section className="border border-gray-2/40 bg-black px-6 py-16 md:px-10">
-        <p className="font-display text-4xl leading-tight md:text-6xl">{page.homeKarmaQuote}</p>
-      </section>
+      <KarmaCenterpiece
+        quote={page.homeKarmaQuote}
+        line="The universal law was always at work. We built the infrastructure to reveal it."
+      />
 
       <PipelineCards pipelines={pipelines} locale={locale} heading={page.homeGrowHeading} />
 
