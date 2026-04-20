@@ -11,7 +11,7 @@ export function InfrastructureStack({ layers, heading }: InfrastructureStackProp
       <h2 className="font-display text-4xl md:text-5xl">{heading}</h2>
       <div className="space-y-3">
         {layers.map((layer) => (
-          <div key={layer.id} className="border border-gray-2/40 bg-navy-2 p-5">
+          <div key={layer.id} className="card-surface p-5">
             <p className="text-xl font-medium">{layer.name}</p>
             <p className="mt-2 text-gray-1">{layer.description}</p>
           </div>

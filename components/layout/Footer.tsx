@@ -10,21 +10,21 @@ export function Footer() {
         </div>
 
         <div className="space-y-2 text-sm text-gray-1">
-          <p>Infrastructure</p>
-          <p>Operasyon 4.0</p>
-          <p>Services</p>
-          <p>Grow</p>
+          <p className="link-animated inline-flex w-fit">Infrastructure</p>
+          <p className="link-animated inline-flex w-fit">Operasyon 4.0</p>
+          <p className="link-animated inline-flex w-fit">Services</p>
+          <p className="link-animated inline-flex w-fit">Grow</p>
         </div>
 
         <div className="space-y-2 text-sm text-gray-1">
-          <p>Sectors</p>
-          <p>About</p>
-          <p>Contact</p>
+          <p className="link-animated inline-flex w-fit">Sectors</p>
+          <p className="link-animated inline-flex w-fit">About</p>
+          <p className="link-animated inline-flex w-fit">Contact</p>
         </div>
 
         <div className="space-y-2 text-sm text-gray-1">
           <p>Newsletter</p>
-          <Link href="https://www.linkedin.com" target="_blank" rel="noreferrer">
+          <Link href="https://www.linkedin.com" target="_blank" rel="noreferrer" className="link-animated inline-flex w-fit">
             LinkedIn
           </Link>
         </div>

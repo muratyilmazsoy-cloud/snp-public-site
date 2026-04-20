@@ -20,7 +20,7 @@ export function Header({ locale }: HeaderProps) {
           <LocaleSwitcher locale={locale} />
           <Link
             href={`/${locale}/diagnose`}
-            className="rounded-full bg-cyan px-4 py-2 text-sm font-medium text-navy transition-colors hover:bg-cyan-2"
+            className="btn-micro rounded-full bg-cyan px-4 py-2 text-sm font-medium text-navy transition-colors hover:bg-cyan-2"
           >
             Diagnose
           </Link>

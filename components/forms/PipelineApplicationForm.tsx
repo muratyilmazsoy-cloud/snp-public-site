@@ -68,12 +68,12 @@ export function PipelineApplicationForm({ endpoint, submitLabel, labels, fields 
           <label key={field} className="space-y-2 text-sm text-gray-1">
             {fieldLabel(field)}
             {field === "message" ? (
-              <textarea {...register(field)} rows={4} className="w-full border border-gray-2/40 bg-navy px-3 py-2 text-white" />
+              <textarea {...register(field)} rows={4} className="input-surface w-full px-3 py-2" />
             ) : (
               <input
                 type={field === "email" ? "email" : "text"}
                 {...register(field)}
-                className="w-full border border-gray-2/40 bg-navy px-3 py-2 text-white"
+                className="input-surface w-full px-3 py-2"
               />
             )}
             {errors[field] ? <span className="text-danger">{String(errors[field]?.message ?? "")}</span> : null}
@@ -81,7 +81,7 @@ export function PipelineApplicationForm({ endpoint, submitLabel, labels, fields 
         ))}
       </div>
 
-      <button type="submit" disabled={isSubmitting} className="rounded-full bg-cyan px-5 py-3 font-medium text-navy hover:bg-cyan-2 disabled:opacity-60">
+      <button type="submit" disabled={isSubmitting} className="btn-micro rounded-full bg-cyan px-5 py-3 font-medium text-navy hover:bg-cyan-2 disabled:opacity-60">
         {isSubmitting ? labels.sending : submitLabel}
       </button>
 

@@ -16,7 +16,7 @@ export function LayersGrid({ layers, locale, heading }: LayersGridProps) {
           <Link
             key={layer.id}
             href={`/${locale}/operasyon-4-0/${layer.slug}`}
-            className="group border border-gray-2/40 bg-navy-2 p-5 transition-colors hover:border-cyan/50"
+            className="card-interactive group p-5"
           >
             <h3 className="text-xl font-medium">{layer.name}</h3>
             <p className="mt-3 text-sm text-gray-1 group-hover:text-white">{layer.description}</p>

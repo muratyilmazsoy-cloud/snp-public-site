@@ -11,7 +11,7 @@ export function KarmaFramingsGrid({ framings, heading }: KarmaFramingsGridProps)
       <h2 className="font-display text-4xl md:text-5xl">{heading}</h2>
       <div className="grid gap-4 md:grid-cols-2">
         {framings.map((item) => (
-          <article key={item.id} className="border border-gray-2/40 bg-navy-2 p-6">
+          <article key={item.id} className="card-surface p-6">
             <h3 className="text-2xl font-medium">{item.title}</h3>
             <p className="mt-3 whitespace-pre-line text-gray-1">{item.description}</p>
           </article>

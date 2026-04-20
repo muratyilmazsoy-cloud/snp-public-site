@@ -42,24 +42,24 @@ export function ContactForm({ submitLabel }: { submitLabel: string }) {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 border border-gray-2/40 bg-navy-2 p-6">
       <div className="grid gap-4 md:grid-cols-2">
         <label className="space-y-2 text-sm text-gray-1">Name
-          <input {...register("name")} className="w-full border border-gray-2/40 bg-navy px-3 py-2 text-white" />
+          <input {...register("name")} className="input-surface w-full px-3 py-2" />
           {errors.name ? <span className="text-danger">{errors.name.message}</span> : null}
         </label>
         <label className="space-y-2 text-sm text-gray-1">Email
-          <input type="email" {...register("email")} className="w-full border border-gray-2/40 bg-navy px-3 py-2 text-white" />
+          <input type="email" {...register("email")} className="input-surface w-full px-3 py-2" />
           {errors.email ? <span className="text-danger">{errors.email.message}</span> : null}
         </label>
         <label className="space-y-2 text-sm text-gray-1">Company
-          <input {...register("company")} className="w-full border border-gray-2/40 bg-navy px-3 py-2 text-white" />
+          <input {...register("company")} className="input-surface w-full px-3 py-2" />
           {errors.company ? <span className="text-danger">{errors.company.message}</span> : null}
         </label>
         <label className="space-y-2 text-sm text-gray-1">Country
-          <input {...register("country")} className="w-full border border-gray-2/40 bg-navy px-3 py-2 text-white" />
+          <input {...register("country")} className="input-surface w-full px-3 py-2" />
           {errors.country ? <span className="text-danger">{errors.country.message}</span> : null}
         </label>
       </div>
       <label className="space-y-2 text-sm text-gray-1">Interest
-        <select {...register("interest")} className="w-full border border-gray-2/40 bg-navy px-3 py-2 text-white">
+        <select {...register("interest")} className="input-surface w-full px-3 py-2">
           <option value="">Select</option>
           <option value="Infrastructure">Infrastructure</option>
           <option value="Operasyon 4.0">Operasyon 4.0</option>
@@ -69,10 +69,10 @@ export function ContactForm({ submitLabel }: { submitLabel: string }) {
         {errors.interest ? <span className="text-danger">{errors.interest.message}</span> : null}
       </label>
       <label className="space-y-2 text-sm text-gray-1">Message
-        <textarea {...register("message")} rows={4} className="w-full border border-gray-2/40 bg-navy px-3 py-2 text-white" />
+        <textarea {...register("message")} rows={4} className="input-surface w-full px-3 py-2" />
         {errors.message ? <span className="text-danger">{errors.message.message}</span> : null}
       </label>
-      <button type="submit" disabled={isSubmitting} className="rounded-full bg-cyan px-5 py-3 font-medium text-navy disabled:opacity-60">
+      <button type="submit" disabled={isSubmitting} className="btn-micro rounded-full bg-cyan px-5 py-3 font-medium text-navy disabled:opacity-60">
         {isSubmitting ? "Sending..." : submitLabel}
       </button>
       {status ? <p className="text-sm text-gray-1">{status}</p> : null}
