@@ -413,6 +413,117 @@ small {
   color: var(--text-primary);
 }
 
+.dashboard-mockup {
+  display: grid;
+  grid-template-columns: 16% 84%;
+  border: 0.5px solid var(--navy-edge);
+  background: var(--navy-2);
+  border-radius: 16px;
+  min-height: 360px;
+  overflow: hidden;
+  transform: perspective(1200px) rotateY(-3deg) rotateX(2deg);
+}
+
+.dashboard-mockup-compact {
+  min-height: 280px;
+}
+
+.dashboard-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border-right: 0.5px solid var(--navy-edge);
+}
+
+.dashboard-main {
+  padding: 12px;
+}
+
+.dashboard-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.dashboard-search {
+  border: 0.5px solid var(--navy-edge);
+  border-radius: 999px;
+  padding: 5px 12px;
+  color: var(--text-secondary);
+}
+
+.dashboard-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--amber);
+}
+
+.dashboard-grid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 35% 40% 25%;
+  gap: 8px;
+}
+
+.dashboard-card {
+  border: 0.5px solid var(--navy-edge);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--navy-2) 75%, var(--navy-1));
+  padding: 10px;
+}
+
+.mini-mockup {
+  border: 0.5px solid var(--navy-edge);
+  border-radius: 14px;
+  background: var(--navy-2);
+  padding: 16px;
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+
+.stats-band {
+  background: var(--navy-0);
+  border: 0.5px solid var(--navy-edge);
+  padding: 40px 24px;
+}
+
+.video-placeholder {
+  min-height: 360px;
+  border: 0.5px solid var(--navy-edge);
+  border-radius: 16px;
+  background: var(--navy-2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.play-ring {
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (max-width: 768px) {
   h1 {
     font-size: 48px;

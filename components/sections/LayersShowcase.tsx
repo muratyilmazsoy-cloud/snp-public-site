@@ -9,18 +9,18 @@ type LayersShowcaseProps = {
 
 function layerVisual(index: number) {
   if (index === 0) {
-    return <div className="layer-visual layer-visual-network" />;
+    return <div className="layer-visual layer-visual-network" title="Accounting sees every transaction in real time" />;
   }
   if (index === 1) {
-    return <div className="layer-visual layer-visual-clock" />;
+    return <div className="layer-visual layer-visual-clock" title="Deadlines are auto-handled before escalation" />;
   }
   if (index === 2) {
-    return <div className="layer-visual layer-visual-stream" />;
+    return <div className="layer-visual layer-visual-stream" title="Audit entries stream and resolve continuously" />;
   }
   if (index === 3) {
-    return <div className="layer-visual layer-visual-capital" />;
+    return <div className="layer-visual layer-visual-capital" title="Capital flows toward highest karma zones" />;
   }
-  return <div className="layer-visual layer-visual-potential" />;
+  return <div className="layer-visual layer-visual-potential" title="Dormant assets wake up into live value" />;
 }
 
 export function LayersShowcase({ layers, locale, heading }: LayersShowcaseProps) {
