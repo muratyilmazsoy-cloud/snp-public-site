@@ -30,6 +30,7 @@ export default async function HomePage({ params }: HomePageProps) {
       <Hero
         eyebrow={page.hero.eyebrow}
         title={page.hero.title}
+        titleLines={["We didn't invent it.", "We made it visible."]}
         subtitle={page.hero.subtitle}
         animatedTitle={true}
         showScrollIndicator={true}

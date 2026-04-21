@@ -45,7 +45,10 @@ export default async function RootLayout({
       suppressHydrationWarning={true}
       className={`${inter.variable} ${interTight.variable} ${jetBrainsMono.variable}`}
     >
-      <body suppressHydrationWarning={true}>
+      <head>
+        <meta name="google" content="notranslate" />
+      </head>
+      <body suppressHydrationWarning={true} translate="no">
         <div suppressHydrationWarning={true}>{children}</div>
       </body>
     </html>

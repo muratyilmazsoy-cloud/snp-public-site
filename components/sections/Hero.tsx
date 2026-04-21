@@ -4,6 +4,7 @@ import { AnimatedHeadline } from "@/components/motion/AnimatedHeadline";
 type HeroProps = {
   eyebrow: string;
   title: string;
+  titleLines?: string[];
   subtitle: string;
   actions?: ReactNode;
   visual?: ReactNode;
@@ -11,13 +12,32 @@ type HeroProps = {
   showScrollIndicator?: boolean;
 };
 
-export function Hero({ eyebrow, title, subtitle, actions, visual, animatedTitle = false, showScrollIndicator = false }: HeroProps) {
+export function Hero({
+  eyebrow,
+  title,
+  titleLines,
+  subtitle,
+  actions,
+  visual,
+  animatedTitle = false,
+  showScrollIndicator = false,
+}: HeroProps) {
   return (
     <section className="relative overflow-hidden border border-gray-2/30 bg-navy-2 px-6 py-12 md:px-12 md:py-20">
       <div className="relative z-10 grid gap-10 md:grid-cols-[1fr_auto] md:items-center">
         <div className="space-y-6">
           <p className="eyebrow text-gray-1">{eyebrow}</p>
-          <h1>{animatedTitle ? <AnimatedHeadline text={title} /> : title}</h1>
+          <h1>
+            {titleLines?.length
+              ? titleLines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))
+              : animatedTitle
+                ? <AnimatedHeadline text={title} />
+                : title}
+          </h1>
           <p className="max-w-2xl text-lg leading-relaxed text-gray-1">{subtitle}</p>
           {actions ? <div className="flex flex-wrap items-center gap-4">{actions}</div> : null}
         </div>

@@ -95,6 +95,9 @@ h1 {
   font-size: 72px;
   line-height: 1.05;
   letter-spacing: -0.03em;
+  text-wrap: balance;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 h2 {
