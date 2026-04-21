@@ -20,7 +20,8 @@ export default async function MoatsPage({ params }: Props) {
       <MoatsStackLazy items={page.items} />
 
       <section className="border border-gray-2/40 bg-navy-2 p-6">
-        <p className="whitespace-pre-line text-gray-1">{page.closingThesis}</p>
+        <h1 className="text-balance">Everything can be copied. Except how perfectly your business works.</h1>
+        <p className="mt-5 whitespace-pre-line text-gray-1">{page.closingThesis}</p>
       </section>
 
       <Link href={`/${locale}${page.ctaHref}`} className="inline-flex rounded-full bg-cyan px-5 py-3 font-medium text-navy hover:bg-cyan-2">

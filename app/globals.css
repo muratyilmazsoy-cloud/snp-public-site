@@ -345,6 +345,46 @@ small {
   transform: translateY(-50%);
 }
 
+.army-rank-band {
+  border: 0.5px solid var(--navy-edge);
+}
+
+.army-corps-card {
+  transition: background-color 300ms ease-out, transform 300ms ease-out;
+}
+
+.army-corps-card:hover {
+  transform: translateY(-2px);
+  background: var(--navy-3);
+}
+
+.moats-stack {
+  position: relative;
+}
+
+.moats-castle {
+  position: sticky;
+  top: 120px;
+  height: 180px;
+  margin-bottom: -80px;
+  opacity: 0.15;
+  background: linear-gradient(to top, rgba(240, 244, 255, 0.08), rgba(240, 244, 255, 0));
+  clip-path: polygon(10% 100%, 10% 48%, 18% 48%, 18% 32%, 24% 32%, 24% 48%, 34% 48%, 34% 24%, 42% 24%, 42% 48%, 56% 48%, 56% 30%, 62% 30%, 62% 48%, 72% 48%, 72% 22%, 80% 22%, 80% 48%, 90% 48%, 90% 100%);
+}
+
+.moat-sticky-card {
+  position: sticky;
+  top: 120px;
+}
+
+.moat-sticky-card h3 {
+  transition: opacity 300ms ease-out, color 300ms ease-out;
+}
+
+.moat-sticky-card:hover h3:first-of-type {
+  opacity: 0.2;
+}
+
 @media (max-width: 768px) {
   h1 {
     font-size: 48px;
@@ -431,6 +471,30 @@ small {
   .karma-label-left {
     animation-delay: 440ms;
   }
+
+  .army-rank-band {
+    opacity: 0;
+    animation: rank-fade-up 500ms ease-out forwards;
+  }
+
+  .army-rank-band:nth-child(1) { animation-delay: 60ms; }
+  .army-rank-band:nth-child(2) { animation-delay: 140ms; }
+  .army-rank-band:nth-child(3) { animation-delay: 220ms; }
+  .army-rank-band:nth-child(4) { animation-delay: 300ms; }
+  .army-rank-band:nth-child(5) { animation-delay: 380ms; }
+  .army-rank-band:nth-child(6) { animation-delay: 460ms; }
+  .army-rank-band:nth-child(7) { animation-delay: 540ms; }
+  .army-rank-band:nth-child(8) { animation-delay: 620ms; }
+  .army-rank-band:nth-child(9) { animation-delay: 700ms; }
+  .army-rank-band:nth-child(10) { animation-delay: 780ms; }
+
+  .mse-pin-active {
+    animation: mse-pin-pulse 500ms ease-out;
+  }
+
+  .mse-link {
+    animation: mse-link-fade 1s linear;
+  }
 }
 
 @keyframes layer-visual-drift {
@@ -504,6 +568,37 @@ small {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes rank-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mse-pin-pulse {
+  0% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+}
+
+@keyframes mse-link-fade {
+  0% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
   }
 }
 

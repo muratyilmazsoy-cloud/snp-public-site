@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MSESyncMap } from "@/components/sections/MSESyncMap";
 
 type MseOverviewProps = {
   locale: string;
@@ -44,7 +45,10 @@ export function MseOverview({
         </ul>
       </section>
 
-      <section className="border border-cyan/30 bg-navy-2 p-8 text-center text-cyan">{visualizationLabel}</section>
+      <section className="space-y-4">
+        <h2>{visualizationLabel}</h2>
+        <MSESyncMap />
+      </section>
 
       <section>
         <Link href={href} className="inline-flex rounded-full bg-cyan px-5 py-3 font-medium text-navy hover:bg-cyan-2">
