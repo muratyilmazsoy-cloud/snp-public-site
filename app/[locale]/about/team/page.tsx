@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Locale } from "@/lib/i18n/config";
 import { getTeamMembers } from "@/lib/sanity/queries";
 
@@ -16,6 +17,15 @@ export default async function TeamPage({ params }: Props) {
       <section className="grid gap-4 md:grid-cols-2">
         {members.map((member) => (
           <article key={member.id} className="border border-gray-2/40 bg-navy-2 p-6">
+            <div className="relative mb-5 overflow-hidden rounded-xl">
+              <Image
+                src="/images/team/avatar-placeholder.svg"
+                alt={`${member.name} portrait placeholder`}
+                width={800}
+                height={500}
+                className="duotone h-44 w-full object-cover"
+              />
+            </div>
             <h2 className="text-2xl font-medium">{member.name}</h2>
             <p className="mt-2 text-gray-1">{member.role}</p>
             <p className="mt-3 whitespace-pre-line text-gray-1">{member.bio}</p>

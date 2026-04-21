@@ -385,6 +385,31 @@ small {
   opacity: 0.2;
 }
 
+.duotone {
+  filter: grayscale(100%) contrast(1.1);
+  mix-blend-mode: screen;
+  background: linear-gradient(to bottom, var(--navy-1), var(--cyan-dim));
+}
+
+.clients-grid:hover .clients-logo {
+  opacity: 0.5;
+}
+
+.clients-logo {
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: grayscale(100%) brightness(0.8);
+  transition: opacity 220ms ease-out, filter 220ms ease-out, color 220ms ease-out;
+}
+
+.clients-logo:hover {
+  opacity: 1 !important;
+  filter: grayscale(0%) brightness(1);
+  color: var(--text-primary);
+}
+
 @media (max-width: 768px) {
   h1 {
     font-size: 48px;

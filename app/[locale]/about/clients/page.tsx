@@ -13,14 +13,14 @@ export default async function ClientsPage({ params }: Props) {
         <p className="text-sm uppercase tracking-[0.12em] text-gray-1">Clients</p>
         <h1 className="mt-4 font-display text-5xl md:text-6xl">{locale === "tr" ? "Musteriler" : "Clients"}</h1>
       </section>
-      <section className="grid gap-3 md:grid-cols-3">
+      <section className="clients-grid grid gap-3 md:grid-cols-3 lg:grid-cols-6">
         {quotes.map((quote) => (
-          <article key={quote.id} className="border border-gray-2/40 bg-navy-2 p-4 text-center text-gray-1">{quote.logoLabel}</article>
+          <article key={quote.id} className="clients-logo card-surface p-4 text-center text-gray-1">{quote.logoLabel}</article>
         ))}
       </section>
       <section className="space-y-4">
         {quotes.map((quote) => (
-          <blockquote key={quote.id} className="border-l-2 border-cyan/40 pl-4 text-gray-1">
+          <blockquote key={quote.id} className="border-l-2 border-cyan/40 pl-4 font-serif text-gray-1">
             &ldquo;{quote.quote}&rdquo; — {quote.clientName}
           </blockquote>
         ))}

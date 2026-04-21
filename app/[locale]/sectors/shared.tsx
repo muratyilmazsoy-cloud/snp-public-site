@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import { getSectorPageBySlug } from "@/lib/sanity/queries";
@@ -11,6 +12,16 @@ export function renderSectorPage(slug: string) {
     return (
       <div className="space-y-16 py-10 md:py-14">
         <section className="border border-gray-2/40 bg-navy-2 p-8">
+          <div className="relative mb-6 overflow-hidden rounded-2xl border border-navy-edge/60">
+            <Image
+              src="/images/sectors/sector-hero.svg"
+              alt={`${page.heroTitle} sector hero artwork`}
+              width={1600}
+              height={900}
+              priority={true}
+              className="duotone h-56 w-full object-cover md:h-72"
+            />
+          </div>
           <p className="text-sm uppercase tracking-[0.12em] text-gray-1">{page.heroEyebrow}</p>
           <h1 className="mt-4 font-display text-5xl md:text-6xl">{page.heroTitle}</h1>
           <p className="mt-4 whitespace-pre-line text-gray-1">{page.heroSubtitle}</p>
