@@ -857,6 +857,104 @@ small {
   }
 }
 
+.living-vortex-shell {
+  position: absolute;
+  inset: -20% -15% -20% -10%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.living-vortex-shell svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.living-vortex-home { opacity: 0.4; }
+.living-vortex-operasyon { opacity: 0.35; }
+.living-vortex-manifesto { opacity: 0.08; }
+.living-vortex-karma { opacity: 0.2; inset: -10% -10% -10% -10%; }
+
+.living-vortex-right-dim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(3, 11, 24, 0.03) 0%, rgba(3, 11, 24, 0.1) 52%, rgba(3, 11, 24, 0.25) 100%);
+}
+
+.living-vortex-burst {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 520px;
+  height: 520px;
+  transform: translate(-50%, -50%) scale(0.8);
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(125, 208, 255, 0.16), transparent 70%);
+  opacity: 0;
+}
+
+.living-vortex-particle {
+  animation: living-particle-float 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .living-vortex-deep {
+    animation: living-vortex-spin-ccw 90s linear infinite;
+    transform-origin: 50% 50%;
+  }
+
+  .living-vortex-mid {
+    animation: living-vortex-spin-ccw 72s linear infinite, living-vortex-breathe 10s ease-in-out infinite, living-vortex-hue 12s ease-in-out infinite;
+    transform-origin: 50% 50%;
+  }
+
+  .living-vortex-fore {
+    animation: living-vortex-spin-ccw 60s linear infinite;
+    transform-origin: 50% 50%;
+  }
+
+  .living-vortex-core {
+    animation: living-core-pulse 8s ease-in-out infinite;
+  }
+
+  .living-vortex-burst.is-bursting {
+    animation: living-random-burst 1800ms ease-out 1;
+  }
+}
+
+@keyframes living-vortex-spin-ccw {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes living-vortex-breathe {
+  0%, 100% { opacity: 0.65; }
+  50% { opacity: 1; }
+}
+
+@keyframes living-vortex-hue {
+  0%, 100% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(8deg); }
+}
+
+@keyframes living-core-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes living-random-burst {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+  40% { opacity: 0.28; }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+@keyframes living-particle-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
 .vortex-ambient-shell {
   z-index: 0;
 }
