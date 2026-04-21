@@ -40,6 +40,7 @@ export default async function HomePage({ params }: HomePageProps) {
         subtitle={page.hero.subtitle}
         animatedTitle={true}
         showScrollIndicator={true}
+        ambientBackground={<VortexAmbient mode="home" />}
         actions={
           <>
             <Link
@@ -63,8 +64,6 @@ export default async function HomePage({ params }: HomePageProps) {
         visual={<FutureFeature label={page.homeFutureFeatureLabel} />}
         secondaryVisual={<OperasyonDashboardMockup compact={true} />}
       />
-
-      <VortexAmbient />
 
       <section className="grid gap-6 md:grid-cols-2">
         <article className="border border-gray-2/40 bg-navy-2 p-6">

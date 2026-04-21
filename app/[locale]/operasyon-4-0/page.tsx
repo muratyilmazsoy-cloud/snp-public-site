@@ -4,6 +4,7 @@ import { WalkthroughForm } from "@/components/forms/WalkthroughForm";
 import { CustomerResultsGrid } from "@/components/sections/CustomerResultsGrid";
 import { OperasyonHero } from "@/components/sections/OperasyonHero";
 import { ProductVideo } from "@/components/video/ProductVideo";
+import { VortexMark } from "@/components/vortex/VortexMark";
 import type { Locale } from "@/lib/i18n/config";
 import { getLayers, getOperasyonBySlug } from "@/lib/sanity/queries";
 
@@ -63,7 +64,10 @@ export default async function OperasyonPage({ params }: OperasyonPageProps) {
         <div className="space-y-4">
           {layers.map((layer) => (
             <article key={layer.id} className="border border-gray-2/40 bg-navy-2 p-6">
-              <h3 className="text-2xl font-medium">{layer.name}</h3>
+              <div className="flex items-center gap-3">
+                <VortexMark className="h-6 w-6 text-cyan" />
+                <h3 className="text-2xl font-medium">{layer.name}</h3>
+              </div>
               <p className="mt-3 text-gray-1">{layer.description}</p>
               <Link href={`/${locale}/operasyon-4-0/${layer.slug}`} className="mt-4 inline-flex text-cyan hover:text-cyan-2">
                 Go deeper

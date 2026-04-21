@@ -9,6 +9,7 @@ type HeroProps = {
   actions?: ReactNode;
   visual?: ReactNode;
   secondaryVisual?: ReactNode;
+  ambientBackground?: ReactNode;
   animatedTitle?: boolean;
   showScrollIndicator?: boolean;
 };
@@ -21,11 +22,13 @@ export function Hero({
   actions,
   visual,
   secondaryVisual,
+  ambientBackground,
   animatedTitle = false,
   showScrollIndicator = false,
 }: HeroProps) {
   return (
     <section className="relative overflow-hidden border border-gray-2/30 bg-navy-2 px-6 py-12 md:px-12 md:py-20">
+      {ambientBackground}
       <div className="relative z-10 grid gap-10 md:grid-cols-[1fr_auto] md:items-center">
         <div className="space-y-6">
           <p className="eyebrow text-gray-1">{eyebrow}</p>

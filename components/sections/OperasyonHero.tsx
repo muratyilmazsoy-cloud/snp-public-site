@@ -16,7 +16,7 @@ export function OperasyonHero({ eyebrow, title, subtitle, ctaLabel, ctaHref, loc
 
   return (
     <section className="relative overflow-hidden border border-gray-2/40 bg-navy-2 px-6 py-14 md:px-10 md:py-20">
-      <VortexAmbient />
+      <VortexAmbient mode="operasyon" />
       <div className="relative z-10 grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
         <div className="max-w-3xl space-y-6">
           <p className="eyebrow text-gray-1">{eyebrow}</p>

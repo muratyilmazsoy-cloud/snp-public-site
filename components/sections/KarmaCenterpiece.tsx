@@ -1,3 +1,5 @@
+import { VortexAmbient } from "@/components/sections/VortexAmbient";
+
 type KarmaCenterpieceProps = {
   quote: string;
   translation?: string;
@@ -7,6 +9,7 @@ type KarmaCenterpieceProps = {
 export function KarmaCenterpiece({ quote, translation, line }: KarmaCenterpieceProps) {
   return (
     <section className="karma-centerpiece relative flex min-h-screen flex-col items-center justify-center overflow-hidden border border-navy-edge/50 bg-navy-0 px-6 py-16 text-center">
+      <VortexAmbient mode="karma" />
       <div className="karma-dot" />
       <div className="karma-rings" />
       <span className="karma-label karma-label-top eyebrow">Physics</span>

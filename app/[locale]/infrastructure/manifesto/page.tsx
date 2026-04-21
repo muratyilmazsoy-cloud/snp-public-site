@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PortableText } from "next-sanity";
+import { VortexAmbient } from "@/components/sections/VortexAmbient";
 import type { Locale } from "@/lib/i18n/config";
 import { getPageBySlug } from "@/lib/sanity/queries";
 
@@ -16,7 +17,8 @@ export default async function ManifestoPage({ params }: ManifestoPageProps) {
   }
 
   return (
-    <article className="mx-auto w-full max-w-[680px] space-y-10 py-10 md:py-14">
+    <article className="relative mx-auto w-full max-w-[680px] space-y-10 py-10 md:py-14">
+      <VortexAmbient mode="manifesto" />
       <header className="space-y-4">
         <h1 className="font-display text-5xl leading-tight md:text-6xl">{page.manifesto.title}</h1>
         <p className="whitespace-pre-line text-gray-1">{page.manifesto.intro}</p>
