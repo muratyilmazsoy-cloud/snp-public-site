@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { OperasyonDashboardMockup } from "@/components/mockups/OperasyonDashboardMockup";
 import { WalkthroughForm } from "@/components/forms/WalkthroughForm";
+import { CustomerResultsGrid } from "@/components/sections/CustomerResultsGrid";
 import { OperasyonHero } from "@/components/sections/OperasyonHero";
+import { ProductVideo } from "@/components/video/ProductVideo";
 import type { Locale } from "@/lib/i18n/config";
 import { getLayers, getOperasyonBySlug } from "@/lib/sanity/queries";
 
@@ -26,6 +29,11 @@ export default async function OperasyonPage({ params }: OperasyonPageProps) {
         ctaLabel={page.heroCtaLabel}
         ctaHref={page.heroCtaHref}
       />
+      <section className="space-y-4">
+        <OperasyonDashboardMockup />
+        <ProductVideo title="Operasyon 4.0 flagship walkthrough" videoUrl={process.env.NEXT_PUBLIC_HERO_VIDEO_URL} />
+        <Link href={`/${locale}/operasyon-4-0#book`} className="link-animated inline-flex text-cyan">Book a 15-min walkthrough</Link>
+      </section>
 
       <section className="space-y-6">
         <h2 className="font-display text-4xl md:text-5xl">{page.whatItReplacesHeading}</h2>
@@ -90,8 +98,9 @@ export default async function OperasyonPage({ params }: OperasyonPageProps) {
           </blockquote>
         ))}
       </section>
+      <CustomerResultsGrid />
 
-      <section className="space-y-6">
+      <section id="book" className="space-y-6">
         <h2 className="font-display text-4xl md:text-5xl">{page.formHeading}</h2>
         <WalkthroughForm submitLabel={page.formSubmitLabel} labels={page.formLabels} />
       </section>

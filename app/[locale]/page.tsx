@@ -1,11 +1,17 @@
 import Link from "next/link";
 import { FutureFeature } from "@/components/future-feature/FutureFeature";
+import { OperasyonDashboardMockup } from "@/components/mockups/OperasyonDashboardMockup";
 import { Hero } from "@/components/sections/Hero";
+import { CustomerResultsGrid } from "@/components/sections/CustomerResultsGrid";
 import { KarmaCenterpiece } from "@/components/sections/KarmaCenterpiece";
 import { LayersShowcase } from "@/components/sections/LayersShowcase";
+import { OldVsNew } from "@/components/sections/OldVsNew";
 import { PipelineCards } from "@/components/sections/PipelineCards";
+import { SocialProofBands } from "@/components/sections/SocialProofBands";
+import { StatsBand } from "@/components/sections/StatsBand";
 import { VortexAmbient } from "@/components/sections/VortexAmbient";
 import { VortexDivider } from "@/components/sections/VortexDivider";
+import { ProductVideo } from "@/components/video/ProductVideo";
 import type { Locale } from "@/lib/i18n/config";
 import { getLayers, getPageBySlug, getPipelines } from "@/lib/sanity/queries";
 
@@ -55,6 +61,7 @@ export default async function HomePage({ params }: HomePageProps) {
           </>
         }
         visual={<FutureFeature label={page.homeFutureFeatureLabel} />}
+        secondaryVisual={<OperasyonDashboardMockup compact={true} />}
       />
 
       <VortexAmbient />
@@ -73,6 +80,16 @@ export default async function HomePage({ params }: HomePageProps) {
       <LayersShowcase layers={layers} locale={locale} heading={page.homeLayersHeading} />
 
       <VortexDivider />
+      <OldVsNew />
+      <StatsBand />
+
+      <section className="space-y-4">
+        <h2>See Operasyon 4.0 in action · 22 sec</h2>
+        <ProductVideo title="Operasyon 4.0 product walkthrough" videoUrl={process.env.NEXT_PUBLIC_HERO_VIDEO_URL} />
+        <Link href={`/${locale}/operasyon-4-0#book`} className="link-animated inline-flex text-cyan">Book a 15-min walkthrough</Link>
+      </section>
+
+      <CustomerResultsGrid />
 
       <KarmaCenterpiece
         quote={page.homeKarmaQuote}
@@ -80,6 +97,7 @@ export default async function HomePage({ params }: HomePageProps) {
       />
 
       <PipelineCards pipelines={pipelines} locale={locale} heading={page.homeGrowHeading} />
+      <SocialProofBands />
 
       <VortexDivider />
 
