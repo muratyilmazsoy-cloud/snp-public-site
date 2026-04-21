@@ -8,6 +8,7 @@ type HeroProps = {
   subtitle: string;
   actions?: ReactNode;
   visual?: ReactNode;
+  secondaryVisual?: ReactNode;
   animatedTitle?: boolean;
   showScrollIndicator?: boolean;
 };
@@ -19,6 +20,7 @@ export function Hero({
   subtitle,
   actions,
   visual,
+  secondaryVisual,
   animatedTitle = false,
   showScrollIndicator = false,
 }: HeroProps) {
@@ -41,7 +43,10 @@ export function Hero({
           <p className="max-w-2xl text-lg leading-relaxed text-gray-1">{subtitle}</p>
           {actions ? <div className="flex flex-wrap items-center gap-4">{actions}</div> : null}
         </div>
-        {visual ? <div className="justify-self-end">{visual}</div> : null}
+        <div className="space-y-4 justify-self-end">
+          {visual ? <div>{visual}</div> : null}
+          {secondaryVisual ? <div>{secondaryVisual}</div> : null}
+        </div>
       </div>
       {showScrollIndicator ? (
         <div className="scroll-indicator pointer-events-none absolute bottom-4 left-1/2 z-20 -translate-x-1/2 text-center transition-opacity duration-300">

@@ -1,4 +1,8 @@
 import Link from "next/link";
+import { AuditingMockup } from "@/components/mockups/AuditingMockup";
+import { ComplianceMockup } from "@/components/mockups/ComplianceMockup";
+import { InvestmentMockup } from "@/components/mockups/InvestmentMockup";
+import { PotentialMockup } from "@/components/mockups/PotentialMockup";
 
 type LayerDetailTemplateProps = {
   locale: string;
@@ -28,12 +32,21 @@ export function LayerDetailTemplate({
   ctaHref,
 }: LayerDetailTemplateProps) {
   const href = ctaHref.startsWith("/") ? `/${locale}${ctaHref}` : ctaHref;
+  const lc = name.toLowerCase();
+  const mockup =
+    lc.includes("compliance") ? <ComplianceMockup /> :
+    lc.includes("audit") ? <AuditingMockup /> :
+    lc.includes("investment") ? <InvestmentMockup /> :
+    lc.includes("potential") ? <PotentialMockup /> :
+    <div className="mini-mockup">Business OS dashboard stream</div>;
 
   return (
     <div className="space-y-20 py-10 md:space-y-[120px] md:py-14">
       <section className="border border-gray-2/40 bg-navy-2 p-8">
         <h1 className="font-display text-5xl md:text-6xl">{name}</h1>
         <p className="mt-4 whitespace-pre-line text-lg text-gray-1">{definition}</p>
+        <div className="mt-6">{mockup}</div>
+        <p className="mt-3 text-sm text-gray-1">This is what you see in this layer.</p>
       </section>
 
       <section className="space-y-4">
